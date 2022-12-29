@@ -1,0 +1,12 @@
+import librosa
+import matplotlib.pyplot as plt
+
+# Load the audio data and sample rate
+data, rate = librosa.load('speech.wav')
+
+# Compute the spectral roll-off
+roll_off = librosa.feature.spectral_rolloff(data, sr=rate)
+
+# Plot the spectral roll-off
+plt.plot(roll_off.T)
+plt.show()
