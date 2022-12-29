@@ -1,0 +1,12 @@
+import librosa
+import matplotlib.pyplot as plt
+
+# Load the audio data
+data, sr = librosa.load('audio.wav', sr=None)
+
+# Compute the spectral flux
+flux = librosa.onset.onset_strength(y=data, sr=sr, aggregate=np.median)
+
+# Plot the spectral flux
+plt.plot(flux)
+plt.show()
