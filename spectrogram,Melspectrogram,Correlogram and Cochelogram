@@ -1,0 +1,41 @@
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+
+# Load the audio data and sample rate
+data, rate = librosa.load('audio.wav')
+
+# Compute the spectrogram
+spectrogram = np.abs(librosa.stft(data))
+
+# Compute the Mel spectrogram
+mel_spectrogram = librosa.feature.melspectrogram(data, sr=rate)
+
+# Compute the Correlogram
+correlogram = librosa.feature.chroma_cqt(data, sr=rate)
+
+# Compute the Cochleogram
+cochleogram = librosa.feature.melspectrogram(data, sr=rate, n_fft=2048, hop_length=512)
+
+# Plot the Spectrogram
+plt.figure()
+librosa.display.specshow(librosa.amplitude_to_db(spectrogram, ref=np.max), sr=rate, x_axis='time', y_axis='linear')
+plt.title('Spectrogram')
+
+# Plot the Mel Spectrogram
+plt.figure()
+librosa.display.specshow(librosa.amplitude_to_db(mel_spectrogram, ref=np.max), sr=rate, x_axis='time', y_axis='mel')
+plt.title('Mel Spectrogram')
+
+# Plot the Correlogram
+plt.figure()
+librosa.display.specshow(correlogram, sr=rate, x_axis='time', y_axis='chroma')
+plt.title('Correlogram')
+
+# Plot the Cochleogram
+plt.figure()
+librosa.display.specshow(librosa.amplitude_to_db(cochleogram, ref=np.max), sr=rate, x_axis='time', y_axis='mel')
+plt.title('Cochleogram')
+
+# Show the plots
+plt.show()
