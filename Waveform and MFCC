@@ -1,0 +1,23 @@
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+
+# Load the audio file
+y, sr = librosa.load('speech.wav')
+
+# Plot the waveform
+plt.figure()
+librosa.display.waveplot(y, sr=sr)
+
+# Compute the MFCCs
+mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+
+# Plot the MFCCs
+plt.figure()
+librosa.display.specshow(mfccs, sr=sr, x_axis='time')
+plt.colorbar()
+plt.title('MFCCs')
+plt.tight_layout()
+
+# Show the plots
+plt.show()
